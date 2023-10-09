@@ -3,21 +3,27 @@
 
 import React from "react"
 import { createRoot } from "react-dom/client"
-import SaveButton from "./components/SaveButton"
+import SaveSection from "./components/SaveSection"
+
+const activityContainers: { [key: string]: HTMLDivElement | null } = {
+    "assignments": document.querySelector(".assignment-title"),
+    "quizzes": document.querySelector(".quiz-header"),
+}
 
 function addSaveButton() {
-    const buttonsContainer: HTMLDivElement | null = document.querySelector(".assignment-buttons")
+    const url = window.location.href
 
-    if (buttonsContainer) {
+    const activityType = url.replace(/^.+\/\w+\/\d+\//g, "").replace(/\/\d+$/g, "")
+    const activityContainer = activityContainers[activityType]
 
-        buttonsContainer.style.display = "flex"
-        buttonsContainer.style.gap = "5px"
+    if (activityContainer) {
+        const parentComponent = activityContainer?.parentElement
 
         const containerElement = document.createElement("div");
-        buttonsContainer.insertBefore(containerElement, buttonsContainer.firstChild)        
+        parentComponent?.insertBefore(containerElement, activityContainer)
 
         const container = createRoot(containerElement)
-        container.render(React.createElement(SaveButton))
+        container.render(React.createElement(SaveSection, { activityType }))
     }
 }
 
