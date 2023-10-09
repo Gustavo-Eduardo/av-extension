@@ -1,21 +1,23 @@
-import { useEffect } from "react"
+import { useRef } from "react";
+import ActivityList from "./components/ActivityList";
 
 function PopupApp() {
 
-    useEffect(() => {
-        chrome.storage.session.get().then(function (items) {
-            const activitiesDiv = document.getElementById("list") as HTMLDivElement;
-            for (let key in items) {
-                const activityDiv = document.createElement("div");
-                activityDiv.innerHTML = items[key];
-                activitiesDiv.appendChild(activityDiv);
-            }
-        });
-    }, [])
+    const activitiesRef = useRef()
 
-    return (<div>
-        <h1> Actividades guardadas </h1>            
-        <div id="list"/>
+    function handleClear() {
+        activitiesRef.current?.clear()
+        chrome.storage.local.clear()
+    }
+
+    return (<div style={{ width: "500px", margin: "3px 12px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems:"center" }}>
+            <h1> Actividades guardadas </h1>
+            <div>
+                <button onClick={handleClear} style={{padding: "3px"}}> Borrar </button>
+            </div>
+        </div>
+        <ActivityList ref={activitiesRef} />
     </div>)
 }
 
