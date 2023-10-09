@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, Checkbox, Typography } from "@mui/material"
 
 // TODO: Move this into a types file
 declare type ActivityInfo = {
@@ -8,12 +8,20 @@ declare type ActivityInfo = {
     disponibility_date?: string,
 }
 
-function ActivityItem({ activity }: { activity: ActivityInfo }) {
-    return (<Box style={{ border: "2px solid black", borderRadius: "10px", padding: "3px", backgroundColor: "rgba(203, 63, 119, 0.1)" }}>
-        <Typography variant="h6"> {activity.title} </Typography>
+function ActivityItem({ activity, selected, selectActivity }: { activity: ActivityInfo, selected: boolean, selectActivity: () => void }) {
+    return <Card elevation={5} style={{ borderTop: "1rem solid rgba(203, 63, 119, 0.4)", borderRadius: "10px" }}>
+        <CardContent>
+            <Box display={"flex"} justifyContent={"space-between"}>
+                <Box>
+                    <Typography variant="h6"> {activity.title}</Typography>
+                    <Typography> <strong>Entrega: </strong>  {activity.delivery_date} </Typography>
+                </Box>
+                <Checkbox onChange={selectActivity} checked={selected}/>
+            </Box>
 
-        <Typography> <strong> Entrega: </strong> {activity.delivery_date} </Typography>
-    </Box>)
+
+        </CardContent>
+    </Card>
 }
 
 export default ActivityItem

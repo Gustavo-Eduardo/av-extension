@@ -11,6 +11,10 @@ function PopupApp() {
         chrome.storage.local.clear()
     }
 
+    const handleClearSelected = () => {
+        activitiesRef.current?.clearSelected()
+    }    
+
     // function goToOptions() {
     //     window.open(chrome.runtime.getURL("options/options.html"))
     // }
@@ -20,9 +24,11 @@ function PopupApp() {
             <Typography variant="h5">
                 Actividades guardadas
             </Typography>
-            <Box display={"flex"} columnGap={1} alignContent={"center"}>
-                <Button onClick={handleClear} variant="outlined" sx={{ p: 1 }}> Borrar </Button>
-                {/* <Button onClick={goToOptions} variant="outlined" sx={{ p: 1 }}> Go to Options </Button> */}
+            <Box>
+                <Box display={"flex"} gap={2}>
+                    <Button onClick={handleClearSelected} variant="outlined" sx={{ p: 1 }}> Borrar seleccionados </Button>
+                    <Button onClick={handleClear} variant="contained" sx={{ p: 1 }}> Borrar todo </Button>
+                </Box>
             </Box>
         </Box>
         <ActivityList ref={activitiesRef} />
