@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import ActivityItem from "./ActivityItem";
+import { Box, Typography } from "@mui/material";
 
 // TODO: Move this into a types file
 declare type ActivityInfo = {
@@ -27,12 +28,12 @@ function ActivityList(props, ref) {
         });
     }, [])
 
-    return (<div style={{display: "flex", flexDirection: "column", gap: "4px"}}>
+    return (<Box display={"flex"} flexDirection={"column"} gap={1}>
         {activities.length ?
-            activities.map((activity) => (<ActivityItem key={activity.activityId} activity={activity} />)) : <p> No hay actividades guardadas. </p>
+            activities.map((activity) => (<ActivityItem key={activity.activityId} activity={activity} />)) : <Typography> No hay actividades guardadas. </Typography>
         }
 
-    </div>)
+    </Box>)
 }
 
 export default forwardRef(ActivityList)

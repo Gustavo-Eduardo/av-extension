@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import ActivityList from "./components/ActivityList";
+import { Box, Button, Typography } from "@mui/material";
 
 function PopupApp() {
 
@@ -10,20 +11,22 @@ function PopupApp() {
         chrome.storage.local.clear()
     }
 
-    function goToOptions() {
-        window.open(chrome.runtime.getURL("options/options.html"))
-    }
+    // function goToOptions() {
+    //     window.open(chrome.runtime.getURL("options/options.html"))
+    // }
 
-    return (<div style={{ width: "500px", margin: "3px 12px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <h1> Actividades guardadas </h1>
-            <div>
-                <button onClick={handleClear} style={{ padding: "3px" }}> Borrar </button>
-            </div>
-        </div>
+    return (<Box width={"500px"} margin={"3px 12px"}>
+        <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} my={2}>
+            <Typography variant="h5">
+                Actividades guardadas
+            </Typography>
+            <Box>
+                <Button onClick={handleClear} variant="outlined" sx={{ p: 1 }}> Borrar </Button>
+            </Box>
+        </Box>
         <ActivityList ref={activitiesRef} />
-        <button onClick={goToOptions}> Go to options </button>
-    </div>)
+
+    </Box>)
 }
 
 export default PopupApp
