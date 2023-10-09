@@ -20,8 +20,9 @@ function PopupApp() {
             <Typography variant="h5">
                 Actividades guardadas
             </Typography>
-            <Box>
+            <Box display={"flex"} columnGap={1} alignContent={"center"}>
                 <Button onClick={handleClear} variant="outlined" sx={{ p: 1 }}> Borrar </Button>
+                {/* <Button onClick={goToOptions} variant="outlined" sx={{ p: 1 }}> Go to Options </Button> */}
             </Box>
         </Box>
         <ActivityList ref={activitiesRef} />
