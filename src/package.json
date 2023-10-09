@@ -17,8 +17,9 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "start": "bun run index.ts && concurrently \"bun run build-popup\" \"bun run build-background\" \"bun run build-content\"",
+    "start": "bun run index.ts && concurrently \"bun run build-popup\" \"bun run build-background\" \"bun run build-options-page\" \"bun run build-content\"",
     "build-popup": "bun build ./popup/popup.tsx --outfile=../dist/popup/popup.js --watch",
+    "build-options-page": "bun build ./options/options.tsx --outfile=../dist/options/options.js --watch",
     "build-background": "bun build ./background/background.ts --outfile=../dist/background.js --watch",
     "build-content": "bun build ./content-scripts/content.ts --outfile=../dist/scripts/content.js --watch"
   }

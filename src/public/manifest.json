@@ -1,27 +1,38 @@
 {
-    "manifest_version": 3,
-    "name": "Aulavirtual Extension",
-    "version": "1.0",
-    "description": "Improving aulavirtual",
-    "permissions": ["storage"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "action": {
-      "default_popup": "popup/popup.html",
-      "default_icon": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
-      }
-    },
-    "content_scripts": [
-      { "matches": ["https://aulavirtual.espol.edu.ec/*"], "js": ["scripts/content.js"] }
-    ],
-    "icons": {
+  "$schema": "https://json.schemastore.org/chrome-manifest",
+  "manifest_version": 3,
+  "name": "Aulavirtual Extension",
+  "version": "1.0",
+  "description": "Improving aulavirtual",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
-  }
-  
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://aulavirtual.espol.edu.ec/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "options/options.html"
+}
