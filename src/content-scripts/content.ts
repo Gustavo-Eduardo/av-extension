@@ -1,3 +1,6 @@
+/// <reference lib="dom" />
+/// <reference lib="dom.iterable" />
+
 function createActivityItem(titleHeader, overview) {
     const activityItem = document.createElement("div")
     const header = document.createElement("h2")
@@ -16,7 +19,7 @@ function createSaveMethod(overview) {
 }
 
 function addSaveButton() {
-  const overview = document.querySelector(".student-assignment-overview");
+  const overview = document.querySelector(".student-assignment-overview")
   const titleHeader = document.querySelector(".title-content > .title")
   if (overview && titleHeader) {
     const liButton = document.createElement("button");
@@ -26,7 +29,5 @@ function addSaveButton() {
     overview.appendChild(liButton);
   }
 }
-
-function buttonChange() {}
 
 addSaveButton();
