@@ -5,7 +5,8 @@ import { v4 } from "uuid"
 
 function getActivityInfo(activityId: string, activityType: string): ActivityInfo {
     let activityTitle;
-    let activityDeliveryDate; 
+    let activityDeliveryDate;
+    const activityUrl = window.location.href
 
     if(activityType === ACTIVITY_TYPES.ASSIGNMENT) {
         const titleElement: HTMLHeadingElement | null = document.querySelector(".assignment-title h1.title")
@@ -33,6 +34,7 @@ function getActivityInfo(activityId: string, activityType: string): ActivityInfo
     const info = {
         activityId,
         type: activityType,
+        url: activityUrl,
         title: activityTitle,
         delivery_date: activityDeliveryDate,
     }
