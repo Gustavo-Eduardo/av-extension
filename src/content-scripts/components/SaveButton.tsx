@@ -20,9 +20,7 @@ function getActivityInfo(activityId: string, activityType: string): ActivityInfo
 
         activityTitle = titleElement?.innerHTML
         activityDeliveryDate = dateTextSpan?.textContent?.replace(/\s+/g, " ").trim()
-    }
-
-    if(activityType === ACTIVITY_TYPES.QUIZ) {
+    } else if(activityType === ACTIVITY_TYPES.QUIZ) {
         const titleElement: HTMLHeadingElement | null = document.querySelector(".quiz-header h1#quiz_title")
 
         const quizDetailsElement: HTMLElement | null = document.getElementById("quiz_student_details")
@@ -34,6 +32,9 @@ function getActivityInfo(activityId: string, activityType: string): ActivityInfo
         console.log(quizDetailsElementChilds?.[0])
         activityTitle = titleElement?.innerHTML
         activityDeliveryDate = dateText
+    } else {
+        // TODO: Handle error when called
+        throw new Error("Not supported type " + activityType)
     }
 
     const info = {

@@ -13,7 +13,9 @@ const activityContainers: { [key: string]: HTMLDivElement | null } = {
 function addSaveButton() {
     const url = window.location.href
 
-    const activityType = url.replace(/^.+\/\w+\/\d+\//g, "").replace(/\/\d+$/g, "")
+    const regex = new RegExp(Object.keys(activityContainers).reduce((expr, key) => expr + key + "|", "").slice(0, -1))
+    const [activityTypeMatch] = url.match(regex) ?? []
+    const activityType = activityTypeMatch ?? ""
     const activityContainer = activityContainers[activityType]
 
     if (activityContainer) {
