@@ -1,14 +1,7 @@
 import { ACTIVITY_TYPES } from "consts/activityConsts"
 import { useState } from "react"
+import { ActivityInfo } from "types/activity";
 import { v4 } from "uuid"
-
-// TODO: Move this into a types file
-declare type ActivityInfo = {
-    activityId: string,
-    title?: string,
-    delivery_date?: string
-    disponibility_date?: string,
-}
 
 function getActivityInfo(activityId: string, activityType: string): ActivityInfo {
     let activityTitle;
