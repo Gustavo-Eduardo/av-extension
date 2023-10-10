@@ -1,5 +1,6 @@
 import fs from "node:fs/promises"
 import path from "node:path"
+import chokidar from "chokidar"
 
 const sourceDir = path.join(__dirname, 'public');
 const destDir = "../dist";
@@ -32,4 +33,31 @@ async function copyFiles(source: string, destination:string ) {
     }
 }
 
-copyFiles(sourceDir, destDir);
+// Set up chokidar to watch the source directory
+const watcher = chokidar.watch(sourceDir, {
+    persistent: true,
+    ignoreInitial: true,
+    ignored: '**/node_modules/**',
+});
+
+watcher
+    .on('add', (filePath) => {
+        const relativePath = path.relative(sourceDir, filePath);
+        copyFiles(filePath, path.join(destDir, relativePath));
+    })
+    .on('change', (filePath) => {
+        const relativePath = path.relative(sourceDir, filePath);
+        copyFiles(filePath, path.join(destDir, relativePath));
+    })
+    .on('unlink', (filePath) => {
+        const relativePath = path.relative(sourceDir, filePath);
+        const destFilePath = path.join(destDir, relativePath);
+        fs.unlink(destFilePath).then(() => {
+            console.log(`Deleted ${destFilePath}`);
+        }).catch(error => {
+            console.error('Error deleting file:', error);
+        });
+    })
+    .on('error', (error) => console.error(`Watcher error: ${error}`));
+
+console.log(`Watching ${sourceDir} for changes...`);
