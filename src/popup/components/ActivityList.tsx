@@ -2,14 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import ActivityItem from "./ActivityItem";
 import { Box, Typography } from "@mui/material";
 import { act } from "react-dom/test-utils";
-
-// TODO: Move this into a types file
-declare type ActivityInfo = {
-    activityId: string,
-    title?: string,
-    delivery_date?: string
-    disponibility_date?: string,
-}
+import { ActivityInfo } from "types/activity";
 
 function ActivityList(props, ref) {
     const [activities, setActivities] = useState<ActivityInfo[] | []>([])
