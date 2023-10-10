@@ -32,6 +32,7 @@ function getActivityInfo(activityId: string, activityType: string): ActivityInfo
 
     const info = {
         activityId,
+        type: activityType,
         title: activityTitle,
         delivery_date: activityDeliveryDate,
     }

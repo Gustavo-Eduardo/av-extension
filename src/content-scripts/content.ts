@@ -4,10 +4,11 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
 import SaveSection from "./components/SaveSection"
+import { ACTIVITY_TYPES } from "consts/activityConsts"
 
 const activityContainers: { [key: string]: HTMLDivElement | null } = {
-    "assignments": document.querySelector(".assignment-title"),
-    "quizzes": document.querySelector(".quiz-header"),
+    [ACTIVITY_TYPES.ASSIGNMENT]: document.querySelector(".assignment-title"),
+    [ACTIVITY_TYPES.QUIZ]: document.querySelector(".quiz-header"),
 }
 
 function addSaveButton() {
